@@ -1,18 +1,11 @@
-import { Box, Flex, IconButton, Input, Text} from "@chakra-ui/react";
-import { Menu, MenuButton, MenuList, MenuItem } from "@chakra-ui/react";
-
-
-
+import { Box, Flex, Input, Text } from "@chakra-ui/react";
 import { IoBookSharp } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
-import { FaRegUser } from "react-icons/fa";
-import { FaRegIdCard } from "react-icons/fa";
-import { AiOutlineLogin } from "react-icons/ai";
-import SignModel from "../signUpModal/SignModel";
 import MenuComponent from "../menu/MenuComponent";
+import { Link } from "react-router-dom";
 
 function Nav() {
-  
+
   return (
     <Flex
       justifyContent={"space-between"}
@@ -20,30 +13,24 @@ function Nav() {
       p="2"
       borderBottom="1px"
       borderColor="gray.100"
+      wrap={"wrap"}
     >
-      <Flex align="center">
-        <IoBookSharp />
-        <Text>BookShop</Text>
-      </Flex>
+      <Link to="/">
+        <Flex align="center">
+          <IoBookSharp />
+          <Text>BookShop</Text>
+        </Flex>
+      </Link>
       <Box>
-        <Input placeholder="Basic usage" />
+        <Input placeholder="Search by Full Title or Author" />
       </Box>
       <Box>
         <Flex align="center" gap={2}>
-          <BsCart4 />
+          <Link to="/checkout">
+            <BsCart4 style={{ fontSize: "30px" }} />
+           
+          </Link>
           <Box>
-            {/* <Menu>
-              <MenuButton
-                as={IconButton}
-                aria-label="Options"
-                icon={<FaRegUser />}
-                variant="outline"
-              />
-              <MenuList>
-                <MenuItem icon={<AiOutlineLogin />} onClick={() => <SignModel />}>Login</MenuItem>
-                <MenuItem icon={<FaRegIdCard />}>Sign Up</MenuItem>
-              </MenuList>
-            </Menu> */}
             <MenuComponent />
           </Box>
         </Flex>
