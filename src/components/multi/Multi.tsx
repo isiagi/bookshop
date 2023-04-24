@@ -3,14 +3,26 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import { BsStarFill } from "react-icons/bs";
-import img from "../../assets/book.jpg";
+// import img from "../../assets/book.jpg";
+
+import { useFetchBooks } from "../../hooks/data";
+import { Link } from "react-router-dom";
 
 type Props = {
   seller: boolean;
   speed: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sellerData?: any;
 };
 
-function Multi({ seller, speed }: Props) {
+function Multi({ seller, speed, sellerData }: Props) {
+  const data = useFetchBooks();
+  // console.log('muti', data);
+
+  if (sellerData) {
+    data.reverse();
+  }
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -23,11 +35,11 @@ function Multi({ seller, speed }: Props) {
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 4,
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 3,
+      items: 1,
     },
   };
   return (
@@ -39,31 +51,37 @@ function Multi({ seller, speed }: Props) {
         draggable
         infinite
       >
-        {[1, 2, 3, 4, 5, 6, 7].map(() => (
-          <Box bg={"red"} h={"360"} mr={4}>
-            <Box h={"60"} w={"100%"}>
-              <Image
-                src={img}
-                alt="hello"
-                h={"100%"}
-                w={"100%"}
-                objectFit={"cover"}
-              />
-            </Box>
-            <Box>
-              <Text>The Crown</Text>
-              <Text>Geofrey Isiagi</Text>
-              <Button display={!seller ? "block" : "none"} variant={"outline"}>
-                shs 2000
-              </Button>
-              <Box display={seller ? "block" : "none"}>
-                <Flex align={"center"} gap={2}>
-                  <BsStarFill /> <Text>4.5 rating</Text>
-                </Flex>
-                <Text>shs 2000</Text>
+        {data.map((item) => (
+          <Link to={`/details/${item._id}`}>
+            {" "}
+            <Box h={"420"} mr={4}>
+              <Box h={"80"} w={"100%"}>
+                <Image
+                  src={item.imageUrl}
+                  alt="hello"
+                  h={"100%"}
+                  w={"100%"}
+                  objectFit={"cover"}
+                />
+              </Box>
+              <Box>
+                <Text>{item.title}</Text>
+                <Text>{item.author}</Text>
+                <Button
+                  display={!seller ? "block" : "none"}
+                  variant={"outline"}
+                >
+                  shs {item.price}
+                </Button>
+                <Box display={seller ? "block" : "none"}>
+                  <Flex align={"center"} gap={2}>
+                    <BsStarFill /> <Text>4.5 rating</Text>
+                  </Flex>
+                  <Text>shs {item.price}</Text>
+                </Box>
               </Box>
             </Box>
-          </Box>
+          </Link>
         ))}
       </Carousel>
     </Box>

@@ -8,7 +8,7 @@ function BreadcrumbComponent() {
   return (
     <Breadcrumb>
       <BreadcrumbItem>
-        <BreadcrumbLink href="#">Home</BreadcrumbLink>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
 
       <BreadcrumbItem>
