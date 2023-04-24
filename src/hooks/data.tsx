@@ -14,7 +14,7 @@ interface Book {
 
 export async function logIn(email: string, password: string): Promise<string> {
   try {
-      const response: AxiosResponse<string> = await axios.post('http://localhost:5000/api/v1/auth/login',{email: email, password: password});
+      const response: AxiosResponse<string> = await axios.post('https://books-api-l2c5.onrender.com/api/v1/auth/login',{email: email, password: password});
       return response.data;
     } catch (error) {
       console.error('Error Logging In:', error);
@@ -24,7 +24,7 @@ export async function logIn(email: string, password: string): Promise<string> {
 
 export async function signUp(email: string, password: string): Promise<string> {
   try {
-      const response: AxiosResponse<string> = await axios.post('http://localhost:5000/api/v1/auth/signup',{email: email, password: password});
+      const response: AxiosResponse<string> = await axios.post('https://books-api-l2c5.onrender.com/api/v1/auth/signup',{email: email, password: password});
       return response.data;
     } catch (error) {
       console.error('Error Logging In:', error);
@@ -34,7 +34,7 @@ export async function signUp(email: string, password: string): Promise<string> {
 
 async function fetchBooks(): Promise<Book[]> {
     try {
-        const response: AxiosResponse<Book[]> = await axios.get('http://localhost:5000/api/v1/book/');
+        const response: AxiosResponse<Book[]> = await axios.get('https://books-api-l2c5.onrender.com/api/v1/book/');
         return response.data;
       } catch (error) {
         console.error('Error fetching books:', error);
@@ -45,7 +45,7 @@ async function fetchBooks(): Promise<Book[]> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function fetchBookById(id:any): Promise<Book[]> {
     try {
-        const response: AxiosResponse<Book[]> = await axios.get(`http://localhost:5000/api/v1/book/${id}`);
+        const response: AxiosResponse<Book[]> = await axios.get(`https://books-api-l2c5.onrender.com/api/v1/book/${id}`);
         return response.data;
       } catch (error) {
         console.error('Error fetching books:', error);
