@@ -1,5 +1,5 @@
 import React, { createContext } from "react";
-import useLocalStorageState from '../hooks/useLocalStorage'
+import useLocalStorageState from "../hooks/useLocalStorage";
 
 export const AppContext = createContext();
 
@@ -7,7 +7,7 @@ export const Context = (props) => {
   const [cart, setCart] = useLocalStorageState("cartItems", []);
 
   const addCart = (parcel) => {
-    const exist = cart.find((item) => item.isbn === parcel.isbn);
+    const exist = cart.find((item) => item._id === parcel._id);
     if (!exist) {
       setCart([...cart, { ...parcel }]);
       alert(`${parcel.title} added to cart`);
@@ -17,23 +17,27 @@ export const Context = (props) => {
   };
 
   const onIncrease = (parcel) => {
-    const exist = cart.find((item) => item.id === parcel.id);
+    const exist = cart.find((item) => item._id === parcel._id);
+    console.log(parcel);
+    console.log(cart);
     if (exist) {
       setCart(
         cart.map((item) =>
-          item.id === parcel.id ? { ...exist, qty: exist.qty + 1 } : item
+          item._id === parcel._id ? { ...exist, qty: exist.qty + 1 } : item
         )
       );
+    } else {
+      alert("Please");
     }
   };
 
   const onDecrease = (parcel) => {
-    const exist = cart.find((item) => item.id === parcel.id);
+    const exist = cart.find((item) => item._id === parcel._id);
     if (exist) {
       if (exist.qty === 1) return;
       setCart(
         cart.map((item) =>
-          item.id === parcel.id ? { ...exist, qty: exist.qty - 1 } : item
+          item._id === parcel._id ? { ...exist, qty: exist.qty - 1 } : item
         )
       );
     }
@@ -41,7 +45,7 @@ export const Context = (props) => {
 
   const onRemove = (parcel) => {
     if (window.confirm("Are you sure you want to remove this item")) {
-      setCart(cart.filter((item) => item.id !== parcel.id));
+      setCart(cart.filter((item) => item.id !== parcel._id));
     }
   };
 
@@ -53,7 +57,14 @@ export const Context = (props) => {
 
   return (
     <AppContext.Provider
-      value={{ cart, onRemove, addCart, onIncrease, onDecrease, onClear }}
+      value={{
+        cart,
+        onRemove,
+        addCart,
+        onIncrease,
+        onDecrease,
+        onClear,
+      }}
     >
       {props.children}
     </AppContext.Provider>

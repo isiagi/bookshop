@@ -6,7 +6,7 @@ function TopRating() {
   return (
     <Box px={"10"} py={27}>
       <Text>Top Rating</Text>
-      <Multi seller={true} speed={6000}/>
+      <Multi seller={true} speed={6000} sellerData={true}/>
     </Box>
   )
 }

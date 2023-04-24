@@ -1,7 +1,11 @@
 import { Flex, Text } from "@chakra-ui/react";
 import img from "../../assets/book.jpg";
 
-function MInHeader() {
+type CName = {
+  name: string;
+}
+
+function MInHeader({name}:CName) {
   return (
     <Flex
       bgImage={`linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(${img})`}
@@ -12,7 +16,7 @@ function MInHeader() {
       align={'center'}
       justify={'center'}
     >
-        <Text>Checkout</Text>
+        <Text fontSize='3xl' color={"#fff"} >{name}</Text>
     </Flex>
   );
 }

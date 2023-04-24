@@ -3,7 +3,7 @@ import React from "react";
 import ModalComponent from "../modal/Modal";
 
 function SignModel() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { isOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   return (
