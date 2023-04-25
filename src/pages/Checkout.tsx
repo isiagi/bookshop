@@ -5,6 +5,7 @@ import BreadcrumbComponent from "../components/breadcrumb/Breadcrumb";
 import MInHeader from "../components/minheader/MInHeader";
 import { useContext } from "react";
 import { AppContext } from "../context/Context";
+import { Link } from "react-router-dom";
 
 function Checkout() {
   const { cart, onIncrease, onDecrease } = useContext(AppContext);
@@ -62,7 +63,7 @@ function Checkout() {
               <Text>Total price</Text>
               <Text>Shs {totalPrice}</Text>
             </Flex>
-            <Button>Checkout</Button>
+            <Link to='/orders'><Button>Checkout</Button></Link>
           </Box>
         </Flex>
       </Flex>
