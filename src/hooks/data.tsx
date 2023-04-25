@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -53,6 +54,22 @@ async function fetchBookById(id:any): Promise<Book[]> {
       }
 }
 
+
+async function fetchBookByTitleOrAuthor(book:any): Promise<Book[]> {
+  try {
+      const response: AxiosResponse<Book[]> = await axios.get(`http://localhost:5000/api/v1/book/query/${book}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching books:', error);
+      return [];
+    }
+}
+
+
+
+
+
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function useFetchBookById(id:any): Book[] {
     const [books, setBooks] = useState<Book[]>([]);
@@ -78,6 +95,20 @@ export function useFetchBooks(): Book[] {
     }
     fetchAndSetBooks();
   }, []);
+
+  return books;
+}
+
+export function useFetchBookByTitleOrAuthor(book:any): Book[] {
+  const [books, setBooks] = useState<Book[]>([]);
+
+  useEffect(() => {
+    async function fetchAndSetBooks() {
+      const fetchedBooks = await fetchBookByTitleOrAuthor(book);
+      setBooks(fetchedBooks);
+    }
+    fetchAndSetBooks();
+  }, [book]);
 
   return books;
 }
