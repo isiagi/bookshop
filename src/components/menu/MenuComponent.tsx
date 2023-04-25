@@ -23,8 +23,10 @@ import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegIdCard } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
+import {TbPaperBag} from 'react-icons/tb'
 
 import { signUp, logIn } from "../../hooks/data";
+import { Link } from "react-router-dom";
 
 function MenuComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -78,6 +80,7 @@ function MenuComponent() {
             Login
           </MenuItem>
           <MenuItem icon={<FaRegIdCard />} onClick={() => handleMenuItemClickSign()}>Sign Up</MenuItem>
+          <Link to="/orders"><MenuItem icon={<TbPaperBag />}>Your Orders</MenuItem></Link>
         </MenuList>
       </Menu>
 
