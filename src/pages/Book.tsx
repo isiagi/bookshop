@@ -1,7 +1,9 @@
-import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { useFetchBooks } from "../hooks/data";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
+import { Box, Text } from "@chakra-ui/react";
+import { useFetchBooks } from "../hooks/booksApiCalls";
 import MInHeader from "../components/minheader/MInHeader";
-import { Link } from "react-router-dom";
+import Books from "../components/books/Books";
 
 function Book() {
   const data = useFetchBooks();
@@ -19,49 +21,10 @@ function Book() {
 
   return (
     <Box>
-      <MInHeader name={'Books'} />
-      <Box my={10} mx={10}>
-        <Flex wrap={"wrap"} gap={4} justify={"center"}>
-          {data.map((item) => (
-            <Link to={`/details/${item._id}`}>
-              <Box w={250}>
-                <Box h={330} borderRadius={10}>
-                  <Image
-                    src={item.imageUrl}
-                    alt=""
-                    h={"100%"}
-                    borderRadius={10}
-                    objectFit={"cover"}
-                  />
-                </Box>
-                <Box>
-                  <Text>{item.title}</Text>
-                  <Text>{item.author}</Text>
-                </Box>
-              </Box>
-            </Link>
-          ))}
-        </Flex>
-      </Box>
+      <MInHeader name={"Books"} />
+      <Books data={data} />
     </Box>
   );
 }
 
 export default Book;
-
-// async function FetchData() {
-//   const [data, setData] = useState([]);
-
-//   useEffect(() => {
-//     fetchBooks();
-
-//     function fetchBooks() {
-//       useFetch().then((data) => {
-//         setData(data.data);
-//       });
-//       console.log(data);
-//     }
-//   }, [data]);
-
-//   return data
-// }

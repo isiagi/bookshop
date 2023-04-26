@@ -5,11 +5,25 @@ import BreadcrumbComponent from "../components/breadcrumb/Breadcrumb";
 import MInHeader from "../components/minheader/MInHeader";
 import { useContext } from "react";
 import { AppContext } from "../context/Context";
+import { useNavigate} from "react-router-dom";
+import { postOrders } from "../hooks/ordersApiCalls";
 
 function Checkout() {
   const { cart, onIncrease, onDecrease } = useContext(AppContext);
+  const navigate = useNavigate()
 
   const totalPrice = cart.reduce((a: any, b: any) => a + b.qty * b.price, 0);
+
+  
+
+  const HandleCheckout = () => {
+    console.log(cart);
+    
+    alert('hello')
+    navigate('/orders')
+    //eslint-disable-next-line react-hooks/rules-of-hooks
+    postOrders(cart)
+  }
 
   return (
     <Box>
@@ -62,7 +76,7 @@ function Checkout() {
               <Text>Total price</Text>
               <Text>Shs {totalPrice}</Text>
             </Flex>
-            <Button>Checkout</Button>
+            <Button onClick={HandleCheckout}>Checkout</Button>
           </Box>
         </Flex>
       </Flex>

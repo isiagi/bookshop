@@ -8,7 +8,8 @@ import Nav from "../components/nav/Nav";
 import Details from "./Details";
 import Checkout from "./Checkout";
 import Book from "./Book";
-import Protect from "../utils/Protect";
+import Orders from "./Orders";
+import Searched from './Searched'
 
 
 function index() {
@@ -20,8 +21,10 @@ function index() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/details/:id" element={<Details />} />
-            <Route path="/checkout" element={<Protect isLoggedIn={true}><Checkout /></Protect>} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/books" element={<Book />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/search/:text" element={<Searched />} />
           </Routes>
         </Router>
         </Context>

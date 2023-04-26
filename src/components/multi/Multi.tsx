@@ -5,7 +5,7 @@ import "react-multi-carousel/lib/styles.css";
 import { BsStarFill } from "react-icons/bs";
 // import img from "../../assets/book.jpg";
 
-import { useFetchBooks } from "../../hooks/data";
+import { useFetchBooks } from "../../hooks/booksApiCalls";
 import { Link } from "react-router-dom";
 
 type Props = {
