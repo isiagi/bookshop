@@ -6,27 +6,16 @@ import Quantity from "../components/quantity/Quantity";
 import { useContext } from "react";
 import { AppContext } from "../context/Context";
 import { useParams } from "react-router-dom";
-import { useFetchBookById } from "../hooks/data";
+import { useFetchBookById } from "../hooks/booksApiCalls";
 import MInHeader from "../components/minheader/MInHeader";
 
 function Details() {
-  // const [item, setItem] = useState(Object)
   const { id } = useParams();
 
   const item = useFetchBookById(id);
 
   const { addCart, onIncrease, onDecrease } = useContext(AppContext);
-  // console.log(dataz);
 
-  // const idz = 9780060935467
-
-  // useEffect(() => {
-  //   const ite = data.filter((item) => {
-  //     return item._id === id;
-  //   });
-  //   console.log(ite[0]);
-  //   setItem(ite[0]);
-  // }, [item, id, data]);
   item.price = parseInt(item.price);
   item.qty = parseInt(item.qty);
 

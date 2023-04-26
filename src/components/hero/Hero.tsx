@@ -1,16 +1,16 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
-import img from "../../assets/book.jpg";
+import vid from "../../assets/vid.mp4"
 
 function Hero() {
   return (
     <Box
-    bgImage={`linear-gradient(rgba(0, 0, 0, 0.3),rgba(0, 0, 0, 0.3)) , url(${img})`}
-      h={"90vh"}
-      bgPosition="center"
-      bgRepeat="no-repeat"
-      bgSize={"cover"}
+      h={"100vh"}
+      position={'relative'}
     >
-      <Box pl={36} h={'100%'}>
+      <video autoPlay loop muted style={{objectFit: 'cover',height: '100%', width: '100%'}}>
+        <source src={vid} type="video/mp4"/>
+      </video>
+      <Box pl={36} h={'100%'} w={'100%'} position={'absolute'} top={0} bg={'rgba(0, 0, 0, 0.6)'}>
         <Flex align={'center'} h='100%'>
           <Box>
             <Text fontSize='4xl' color={"#fff"}>Welcome To BookShop</Text>

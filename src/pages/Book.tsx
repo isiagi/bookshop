@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import { Box, Text } from "@chakra-ui/react";
-import { useFetchBooks } from "../hooks/data";
+import { useFetchBooks } from "../hooks/booksApiCalls";
 import MInHeader from "../components/minheader/MInHeader";
 import Books from "../components/books/Books";
 
@@ -21,9 +21,8 @@ function Book() {
 
   return (
     <Box>
-      <MInHeader name={'Books'} />
+      <MInHeader name={"Books"} />
       <Books data={data} />
-    
     </Box>
   );
 }
