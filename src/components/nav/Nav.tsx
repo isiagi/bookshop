@@ -42,6 +42,7 @@ function Nav() {
       position={'sticky'}
       w={'100%'}
       top={0}
+      zIndex={1000}
       bg={'#fff'}
     >
       <Link to="/">
