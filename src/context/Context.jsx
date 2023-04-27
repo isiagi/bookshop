@@ -45,7 +45,7 @@ export const Context = (props) => {
 
   const onRemove = (parcel) => {
     if (window.confirm("Are you sure you want to remove this item")) {
-      setCart(cart.filter((item) => item.id !== parcel._id));
+      setCart(cart.filter((item) => item._id !== parcel._id));
     }
   };
 

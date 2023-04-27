@@ -13,7 +13,7 @@ function Books({data}:TData) {
         <Flex wrap={"wrap"} gap={4} justify={"center"}>
           {data.map((item) => (
             <Link to={`/details/${item._id}`}>
-              <Box w={250}>
+              <Box w={250} _hover={{ transform: "scale(1.05)"}}>
                 <Box h={330} borderRadius={10}>
                   <Image
                     src={item.imageUrl}

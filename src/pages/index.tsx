@@ -9,8 +9,8 @@ import Details from "./Details";
 import Checkout from "./Checkout";
 import Book from "./Book";
 import Orders from "./Orders";
-import Searched from './Searched'
-
+import Searched from "./Searched";
+import AdminUser from "./admin/AdminUser";
 
 function index() {
   return (
@@ -25,9 +25,10 @@ function index() {
             <Route path="/books" element={<Book />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/search/:text" element={<Searched />} />
+            <Route path="/admin" element={<AdminUser />} />
           </Routes>
         </Router>
-        </Context>
+      </Context>
     </Box>
   );
 }

@@ -5,25 +5,23 @@ import BreadcrumbComponent from "../components/breadcrumb/Breadcrumb";
 import MInHeader from "../components/minheader/MInHeader";
 import { useContext } from "react";
 import { AppContext } from "../context/Context";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { postOrders } from "../hooks/ordersApiCalls";
 
 function Checkout() {
-  const { cart, onIncrease, onDecrease } = useContext(AppContext);
-  const navigate = useNavigate()
+  const { cart, onIncrease, onDecrease,onRemove } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const totalPrice = cart.reduce((a: any, b: any) => a + b.qty * b.price, 0);
 
-  
-
   const HandleCheckout = () => {
     console.log(cart);
-    
-    alert('hello')
-    navigate('/orders')
+
+    alert("hello");
+    navigate("/orders");
     //eslint-disable-next-line react-hooks/rules-of-hooks
-    postOrders(cart)
-  }
+    postOrders(cart);
+  };
 
   return (
     <Box>
@@ -38,7 +36,7 @@ function Checkout() {
               <Text>No Item Available In Cart</Text>
             ) : (
               cart.map((item: any) => (
-                <Flex gap={10} mb={4}>
+                <Flex gap={10} mb={4} border={"1px solid gray"}>
                   <Box>
                     <Image
                       src={item.imageUrl}
@@ -56,7 +54,7 @@ function Checkout() {
                         onIncrease={() => onIncrease(item)}
                         onDecrease={() => onDecrease(item)}
                       />
-                      <Text>Delete</Text>
+                      <Text onClick={() => onRemove(item)}>Delete</Text>
                     </Box>
                     <Box>
                       <Text>Shs {item.qty * item.price}</Text>
@@ -76,7 +74,12 @@ function Checkout() {
               <Text>Total price</Text>
               <Text>Shs {totalPrice}</Text>
             </Flex>
-            <Button onClick={HandleCheckout}>Checkout</Button>
+            <Box>
+              <Button onClick={HandleCheckout}>Checkout</Button>
+              <Text>
+                <small>Login To Checkout</small>
+              </Text>
+            </Box>
           </Box>
         </Flex>
       </Flex>

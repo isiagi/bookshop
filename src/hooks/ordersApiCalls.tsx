@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import axios, { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 
-interface Order {
-  bookId: [string];
-  totalPrice: number;
-  qty: number;
-}
+// interface Order {
+//   bookId: [string];
+//   totalPrice: number;
+//   qty: number;
+// }
 
 const token = localStorage.getItem('itemName')
 const headers = {Authorization:`Bearer ${token}`}
@@ -14,10 +16,10 @@ const headers = {Authorization:`Bearer ${token}`}
 export async function fetchOrders(): Promise<any> {
   try {
       const response: AxiosResponse<string> = await axios.get('http://localhost:5000/api/v1/order/',{headers});
-      return response.data;
+      return response.data?.data;
     } catch (error) {
       console.error('Error Logging In:', error);
-     return "Error Occuried"
+     return []
     }
 }
 
@@ -33,9 +35,8 @@ export async function postOrders(cart:any): Promise<any> {
 
 
 
-export function useFetchOrders(): Order[] {
-    const [orders, setOrders] = useState<Order[]>([]);
-  console.log(headers);
+export function useFetchOrders() {
+    const [orders, setOrders] = useState([]);
   
     useEffect(() => {
       async function fetchAndSetBooks() {
