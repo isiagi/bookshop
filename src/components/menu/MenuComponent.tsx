@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Menu,
   MenuButton,
@@ -23,43 +23,66 @@ import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
 import { FaRegUser } from "react-icons/fa";
 import { FaRegIdCard } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
+import { TbPaperBag } from "react-icons/tb";
+import {BiLogOutCircle} from 'react-icons/bi'
 
-import { signUp, logIn } from "../../hooks/data";
+import { signUp, logIn } from "../../hooks/booksApiCalls";
+import { Link } from "react-router-dom";
+import TokenChecker from "../../utils/TokenChecker";
 
 function MenuComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [word, setWord] = useState({})
+  const [word, setWord] = useState({});
+  const [isLogged, setIsLogged] = useState(false)
+
+  const tokenChecker = TokenChecker({key: 'itemName'})
 
   const nameRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const emailRef = React.useRef(null);
 
   const handleMenuItemClickSign = () => {
-      setWord({head:"Create An Account", label: "Register"})
+    setWord({ head: "Create An Account", label: "Register" });
     onOpen();
   };
 
   const handleMenuItemClickLog = () => {
-      setWord({head:"LogIn To Your Account",label:"LogIn"})
+    setWord({ head: "LogIn To Your Account", label: "LogIn" });
     onOpen();
   };
 
   const handleSign = async () => {
-    let token
-    if(word.label === 'Register'){
-
+    let token;
+    if (word.label === "Register") {
       token = await signUp(nameRef.current.value, emailRef.current.value);
       console.log(token);
+      onClose()
     } else {
-      token = await logIn(nameRef.current.value, emailRef.current.value);
+      const response = await logIn(nameRef.current.value, emailRef.current.value);
+      if(response === 'Error Occuried'){
+        alert("try signing up")
+        onClose()
+        return
+      }
+      token = response
+      onClose()
     }
-    
-    localStorage.setItem('itemName', token.token)
-    return token
-  }
 
+    localStorage.setItem("itemName", token.token);
+    setIsLogged(true);
+    return token;
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("itemName");
+    setIsLogged(false);
+    onClose()
+  };
   // console.log(initialRef.current);
-  
+
+  useEffect(() => {
+    setIsLogged(tokenChecker);
+  }, [tokenChecker]);
 
   return (
     <>
@@ -69,15 +92,39 @@ function MenuComponent() {
           aria-label="Options"
           icon={<FaRegUser />}
           variant="outline"
+          color={'#fff'}
+          border={'none'}
+          bg={isLogged ? 'green.500': 'red.400'}
         />
         <MenuList>
-          <MenuItem
-            icon={<AiOutlineLogin />}
-            onClick={() => handleMenuItemClickLog()}
-          >
-            Login
-          </MenuItem>
-          <MenuItem icon={<FaRegIdCard />} onClick={() => handleMenuItemClickSign()}>Sign Up</MenuItem>
+          {isLogged ? (
+            <>
+              <MenuItem icon={<BiLogOutCircle />} onClick={() => handleLogOut()}>
+                LogOut
+              </MenuItem>
+              <Link to="/orders">
+                <MenuItem icon={<TbPaperBag />}>Your Orders</MenuItem>
+              </Link>
+              <Link to="/admin">
+                <MenuItem icon={<TbPaperBag />}>Admin</MenuItem>
+              </Link>
+            </>
+          ) : (
+            <>
+              <MenuItem
+                icon={<AiOutlineLogin style={{color: 'green',fontSize:'18px'}}/>}
+                onClick={() => handleMenuItemClickLog()}
+              >
+                Login
+              </MenuItem>
+              <MenuItem
+                icon={<FaRegIdCard style={{color: 'green',fontSize:'18px'}}/>}
+                onClick={() => handleMenuItemClickSign()}
+              >
+                Sign Up
+              </MenuItem>
+            </>
+          )}
         </MenuList>
       </Menu>
 
@@ -93,13 +140,13 @@ function MenuComponent() {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input ref={nameRef} placeholder="FullName" />
+              <FormLabel>Email</FormLabel>
+              <Input ref={nameRef} placeholder="FullName" required/>
             </FormControl>
 
             <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
-              <Input ref={emailRef} placeholder="Email" />
+              <FormLabel>Password</FormLabel>
+              <Input ref={emailRef} placeholder="Email" required type={'password'}/>
             </FormControl>
           </ModalBody>
 
