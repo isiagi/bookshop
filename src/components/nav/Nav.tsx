@@ -39,6 +39,10 @@ function Nav() {
       borderBottom="1px"
       borderColor="gray.100"
       wrap={"wrap"}
+      position={'sticky'}
+      w={'100%'}
+      top={0}
+      bg={'#fff'}
     >
       <Link to="/">
         <Flex align="center">

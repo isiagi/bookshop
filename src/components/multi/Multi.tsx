@@ -54,7 +54,7 @@ function Multi({ seller, speed, sellerData }: Props) {
         {data.map((item) => (
           <Link to={`/details/${item._id}`}>
             {" "}
-            <Box h={"420"} mr={4}>
+            <Box h={"420"} mr={4} _hover={{ transform: "scale(1.02)"}}>
               <Box h={"80"} w={"100%"}>
                 <Image
                   src={item.imageUrl}
