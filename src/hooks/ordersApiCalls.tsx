@@ -15,7 +15,7 @@ const headers = {Authorization:`Bearer ${token}`}
 
 export async function fetchOrders(): Promise<any> {
   try {
-      const response: AxiosResponse<string> = await axios.get('http://localhost:5000/api/v1/order/',{headers});
+      const response: AxiosResponse<string> = await axios.get('https://books-api-l2c5.onrender.com/api/v1/order/',{headers});
       return response.data?.data;
     } catch (error) {
       console.error('Error Logging In:', error);
@@ -25,7 +25,7 @@ export async function fetchOrders(): Promise<any> {
 
 export async function postOrders(cart:any): Promise<any> {
     try {
-        const response: AxiosResponse<string> = await axios.post('http://localhost:5000/api/v1/order/create',{cartItems:cart},{headers});
+        const response: AxiosResponse<string> = await axios.post('https://books-api-l2c5.onrender.com/api/v1/order/create',{cartItems:cart},{headers});
         return response.data;
       } catch (error) {
         console.error('Error Logging In:', error);

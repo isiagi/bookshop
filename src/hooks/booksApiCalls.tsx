@@ -19,7 +19,7 @@ const headers = { Authorization: `Bearer ${token}` };
 export async function logIn(email: string, password: string): Promise<string> {
   try {
     const response: AxiosResponse<string> = await axios.post(
-      "http://localhost:5000/api/v1/auth/login",
+      "https://books-api-l2c5.onrender.com/api/v1/auth/login",
       { email: email, password: password }
     );
 
@@ -37,7 +37,7 @@ export async function logIn(email: string, password: string): Promise<string> {
 export async function signUp(email: string, password: string): Promise<string> {
   try {
     const response: AxiosResponse<string> = await axios.post(
-      "http://localhost:5000/api/v1/auth/signup",
+      "https://books-api-l2c5.onrender.com/api/v1/auth/signup",
       { email: email, password: password }
     );
     return response.data;
@@ -50,7 +50,7 @@ export async function signUp(email: string, password: string): Promise<string> {
 async function fetchBooks(): Promise<Book[]> {
   try {
     const response: AxiosResponse<Book[]> = await axios.get(
-      "http://localhost:5000/api/v1/book/"
+      "https://books-api-l2c5.onrender.com/api/v1/book/"
     );
     return response.data;
   } catch (error) {
@@ -63,7 +63,7 @@ async function fetchBooks(): Promise<Book[]> {
 async function fetchBookById(id: any): Promise<Book[]> {
   try {
     const response: AxiosResponse<Book[]> = await axios.get(
-      `http://localhost:5000/api/v1/book/${id}`
+      `https://books-api-l2c5.onrender.com/api/v1/book/${id}`
     );
     return response.data;
   } catch (error) {
@@ -77,7 +77,7 @@ async function fetchBookByTitleOrAuthor(book: any): Promise<Book[]> {
 
   try {
     const response: AxiosResponse<Book[]> = await axios.get(
-      `http://localhost:5000/api/v1/book/query/${book}`
+      `https://books-api-l2c5.onrender.com/api/v1/book/query/${book}`
     );
     return response.data;
   } catch (error) {
@@ -89,7 +89,7 @@ async function fetchBookByTitleOrAuthor(book: any): Promise<Book[]> {
 export async function createBook(book: any): Promise<Book[]> {
   try {
     const response: AxiosResponse<Book[]> = await axios.post(
-      `http://localhost:5000/api/v1/book/create`,
+      `https://books-api-l2c5.onrender.com/api/v1/book/create`,
       {
         title: book.title,
         author: book.author,
@@ -111,7 +111,7 @@ export async function createBook(book: any): Promise<Book[]> {
 
 export async function deleteBook(id:any): Promise<any> {
   try {
-      const response: AxiosResponse<string> = await axios.delete(`http://localhost:5000/api/v1/book/delete/${id}`,{headers});
+      const response: AxiosResponse<string> = await axios.delete(`https://books-api-l2c5.onrender.com/api/v1/book/delete/${id}`,{headers});
       return response.data;
     } catch (error) {
       console.error('Error deleting book:', error);
