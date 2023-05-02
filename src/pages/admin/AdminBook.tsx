@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { deleteBook, useFetchBooks } from "../../hooks/booksApiCalls";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -12,7 +13,8 @@ function AdminBook() {
 
   return (
     <Flex direction="column" justify={"center"} align="center">
-      {data.books.map((item) => (
+     
+      {data.books?.map((item:any) => (
         <Flex
           gap={10}
           mb={4}
