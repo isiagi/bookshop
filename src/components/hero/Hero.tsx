@@ -7,7 +7,7 @@ function Hero() {
       h={"100vh"}
       position={'relative'}
     >
-      <video autoPlay loop muted style={{objectFit: 'cover',height: '100%', width: '100%'}}>
+      <video autoPlay loop muted playsInline poster="../../assets/book.jpg" style={{objectFit: 'cover',height: '100%', width: '100%'}}>
         <source src={vid} type="video/mp4"/>
       </video>
       <Box pl={36} h={'100%'} w={'100%'} position={'absolute'} top={0} bg={'rgba(0, 0, 0, 0.6)'}>

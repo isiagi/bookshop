@@ -33,13 +33,13 @@ function Details() {
           />
         </Box>
         <Box maxW={400}>
-          <Text mb={2}>{item.title}</Text>
-          <Text>{item.author}</Text>
-          <Button my={5} variant={"outline"}>
+          <Text mb={2} color="#4299E1" fontWeight={600} fontSize={'2xl'}>{item.title}</Text>
+          <Text color="gray.500" fontSize={'xl'} fontWeight={100}>{item.author}</Text>
+          <Button my={5} variant={"outline"} color={'#68D391'} borderColor={'#68D391'}>
             Shs {item.price}
           </Button>
           <Box mb={5}>
-            <Text>{item.description}</Text>
+            <Text color="gray.600" fontSize="md">{item.description}</Text>
           </Box>
           {/* <Quantity
             qty={item.qty}
@@ -47,7 +47,7 @@ function Details() {
             onDecrease={() => onDecrease(item)}
           /> */}
           <Box my={5}>
-            <Button onClick={() => addCart(item)}>Add To Cart</Button>
+            <Button onClick={() => addCart(item)} bg={"#4299E1"} color={'#fff'}>Add To Cart</Button>
           </Box>
         </Box>
       </Flex>
