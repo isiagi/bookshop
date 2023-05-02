@@ -136,18 +136,21 @@ export function useFetchBookById(id: any): Book[] {
   return books;
 }
 
-export function useFetchBooks(): Book[] {
+export function useFetchBooks() {
   const [books, setBooks] = useState<Book[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true)
     async function fetchAndSetBooks() {
       const fetchedBooks = await fetchBooks();
       setBooks(fetchedBooks);
     }
     fetchAndSetBooks();
+    setIsLoading(false)
   }, [books]);
 
-  return books;
+  return {books, isLoading};
 }
 
 export function useFetchBookByTitleOrAuthor(book: any): Book[] {

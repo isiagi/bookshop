@@ -4,10 +4,16 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react"
 import { Link } from "react-router-dom"
 
 type TData = {
-    data: []
+    data: [],
+    isLoading: boolean,
 }
 
-function Books({data}:TData) {
+function Books({data, isLoading}:TData) {
+  if(isLoading){
+    <div>
+      <h1>Loading...</h1>
+    </div>
+  }
   return (
     <Box my={10} mx={10}>
         <Flex wrap={"wrap"} gap={4} justify={"center"}>
