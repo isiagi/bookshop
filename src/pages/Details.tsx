@@ -3,13 +3,17 @@
 import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import TopRating from "../components/seller/TopRating";
 // import Quantity from "../components/quantity/Quantity";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../context/Context";
 import { useParams } from "react-router-dom";
 import { useFetchBookById } from "../hooks/booksApiCalls";
 import MInHeader from "../components/minheader/MInHeader";
 
 function Details() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { id } = useParams();
 
   const item = useFetchBookById(id);
@@ -33,13 +37,19 @@ function Details() {
           />
         </Box>
         <Box maxW={400}>
-          <Text mb={2}>{item.title}</Text>
-          <Text>{item.author}</Text>
+          <Text mb={2} color="#4299E1" fontWeight={600} fontSize={"2xl"}>
+            {item.title}
+          </Text>
+          <Text color="gray.500" fontSize={"xl"} fontWeight={100}>
+            {item.author}
+          </Text>
           <Button my={5} variant={"outline"}>
             Shs {item.price}
           </Button>
-          <Box mb={5}>
-            <Text>{item.description}</Text>
+          <Box mb={5} color={"#68D391"} borderColor={"#68D391"}>
+            <Text color="gray.600" fontSize="md">
+              {item.description}
+            </Text>
           </Box>
           {/* <Quantity
             qty={item.qty}
@@ -47,7 +57,9 @@ function Details() {
             onDecrease={() => onDecrease(item)}
           /> */}
           <Box my={5}>
-            <Button onClick={() => addCart(item)}>Add To Cart</Button>
+            <Button onClick={() => addCart(item)} bg={"#4299E1"} color={"#fff"}>
+              Add To Cart
+            </Button>
           </Box>
         </Box>
       </Flex>

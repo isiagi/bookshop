@@ -9,13 +9,38 @@ type Props = {
 function Quantity({ qty, onIncrease, onDecrease }: Props) {
   return (
     <Flex gap={3}>
-      <Flex align="center" bg="red" h={9} p={3} onClick={onIncrease}>
+      <Flex
+        align="center"
+        color="#fff"
+        borderRadius={5}
+        bg="#4299E1"
+        h={9}
+        p={3}
+        onClick={onIncrease}
+        cursor={"pointer"}
+      >
         +
       </Flex>
-      <Flex align="center" bg="red" h={9} p={3}>
+      <Flex
+        align="center"
+        color="#fff"
+        borderRadius={5}
+        bg="#4299E1"
+        h={9}
+        p={3}
+      >
         {qty}
       </Flex>
-      <Flex align="center" bg="red" h={9} p={3} onClick={onDecrease}>
+      <Flex
+        align="center"
+        color="#fff"
+        borderRadius={5}
+        bg="#4299E1"
+        h={9}
+        p={3}
+        onClick={onDecrease}
+        cursor={"pointer"}
+      >
         -
       </Flex>
     </Flex>

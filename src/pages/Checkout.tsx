@@ -3,7 +3,7 @@ import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import Quantity from "../components/quantity/Quantity";
 import BreadcrumbComponent from "../components/breadcrumb/Breadcrumb";
 import MInHeader from "../components/minheader/MInHeader";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AppContext } from "../context/Context";
 import { useNavigate } from "react-router-dom";
 import { postOrders } from "../hooks/ordersApiCalls";
@@ -23,6 +23,10 @@ function Checkout() {
     postOrders(cart);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box>
       <MInHeader name={"Cart CheckOut"} />
@@ -36,28 +40,29 @@ function Checkout() {
               <Text>No Item Available In Cart</Text>
             ) : (
               cart.map((item: any) => (
-                <Flex gap={10} mb={4} border={"1px solid gray"}>
+                <Flex gap={10} mb={4} border={"1px solid #E2E8F0"} borderRadius={'lg'}>
                   <Box>
                     <Image
                       src={item.imageUrl}
                       alt=""
                       boxSize="200px"
                       objectFit="cover"
+                      borderRadius={'lg'}
                     />
                   </Box>
-                  <Flex gap={10}>
+                  <Flex gap={10} pr={5}>
                     <Box>
-                      <Text>{item.title}</Text>
-                      <Text>Author: {item.author}</Text>
+                      <Text color="#4299E1">{item.title}</Text>
+                      <Text color='gray.600'>Author: {item.author}</Text>
                       <Quantity
                         qty={item.qty}
                         onIncrease={() => onIncrease(item)}
                         onDecrease={() => onDecrease(item)}
                       />
-                      <Text onClick={() => onRemove(item)}>Delete</Text>
+                      <Text onClick={() => onRemove(item)} color={'tomato'} cursor={'pointer'}>Delete</Text>
                     </Box>
                     <Box>
-                      <Text>Shs {item.qty * item.price}</Text>
+                      <Text color={'#68D391'}>Shs {item.qty * item.price}</Text>
                     </Box>
                   </Flex>
                 </Flex>
@@ -65,19 +70,19 @@ function Checkout() {
             )}
           </Box>
           <Box>
-            <Text>Order Summary</Text>
-            <Flex gap={10}>
+            <Text color='gray.600'>Order Summary</Text>
+            <Flex gap={10} color='gray.600'>
               <Text>VAT</Text>
               <Text>Shs 0</Text>
             </Flex>
-            <Flex gap={10}>
+            <Flex gap={10} color='gray.600'>
               <Text>Total price</Text>
               <Text>Shs {totalPrice}</Text>
             </Flex>
             <Box>
-              <Button onClick={HandleCheckout}>Checkout</Button>
+              <Button onClick={HandleCheckout} bg={'#68D391'} color="#fff" >Checkout</Button>
               <Text>
-                <small>Login To Checkout</small>
+                <small style={{color:'gray'}}>Login To Checkout</small>
               </Text>
             </Box>
           </Box>

@@ -47,7 +47,7 @@ function Nav() {
     >
       <Link to="/">
         <Flex align="center">
-          <IoBookSharp />
+          <IoBookSharp style={{color:'#4299E1'}}/>
           <Text>BookShop</Text>
         </Flex>
       </Link>
@@ -68,7 +68,7 @@ function Nav() {
       <Box>
         <Flex align="center" gap={2}>
           <Link to="/checkout">
-            <BsCart4 style={{ fontSize: "30px" }} />
+            <BsCart4 style={{ fontSize: "30px",color:'#4299E1' }} />
           </Link>
           <Box>
             <MenuComponent />

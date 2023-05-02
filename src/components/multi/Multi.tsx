@@ -20,7 +20,7 @@ function Multi({ seller, speed, sellerData }: Props) {
   // console.log('muti', data);
 
   if (sellerData) {
-    data.reverse();
+    data.books.reverse();
   }
 
   const responsive = {
@@ -51,7 +51,7 @@ function Multi({ seller, speed, sellerData }: Props) {
         draggable
         infinite
       >
-        {data.map((item) => (
+        {data.books.map((item) => (
           <Link to={`/details/${item._id}`}>
             {" "}
             <Box h={"420"} mr={4} _hover={{ transform: "scale(1.02)"}}>
@@ -65,19 +65,21 @@ function Multi({ seller, speed, sellerData }: Props) {
                 />
               </Box>
               <Box>
-                <Text>{item.title}</Text>
-                <Text>{item.author}</Text>
+                <Text color={'#4299E1'}>{item.title}</Text>
+                <Text color={'gray.600'}>{item.author}</Text>
                 <Button
                   display={!seller ? "block" : "none"}
                   variant={"outline"}
+                  color={'#68D391'}
+                  borderColor={'#68D391'}
                 >
                   shs {item.price}
                 </Button>
                 <Box display={seller ? "block" : "none"}>
                   <Flex align={"center"} gap={2}>
-                    <BsStarFill /> <Text>4.5 rating</Text>
+                    <BsStarFill style={{color:'#4299E1'}}/> <Text color={'gray.600'}>4.5 rating</Text>
                   </Flex>
-                  <Text>shs {item.price}</Text>
+                  <Text  color={'#68D391'}>shs {item.price}</Text>
                 </Box>
               </Box>
             </Box>
