@@ -12,7 +12,7 @@ function AdminBook() {
 
   return (
     <Flex direction="column" justify={"center"} align="center">
-      {data.map((item) => (
+      {data.books.map((item) => (
         <Flex
           gap={10}
           mb={4}
