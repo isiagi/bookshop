@@ -1,6 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
 import {
+  Badge,
   Box,
   Flex,
   Input,
@@ -13,17 +14,20 @@ import { BsCart4 } from "react-icons/bs";
 import MenuComponent from "../menu/MenuComponent";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../context/Context";
 
 function Nav() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const { cart } = useContext(AppContext);
 
   const [inputValue, setInputValue] = useState("");
 
   function handleKeyPress(event) {
     if (event.key === "Enter") {
       setInputValue("");
-      navigate(`/search/${inputValue}`)
+      navigate(`/search/${inputValue}`);
     }
   }
 
@@ -39,15 +43,15 @@ function Nav() {
       borderBottom="1px"
       borderColor="gray.100"
       wrap={"wrap"}
-      position={'sticky'}
-      w={'100%'}
+      position={"sticky"}
+      w={"100%"}
       top={0}
       zIndex={1000}
-      bg={'#fff'}
+      bg={"#fff"}
     >
       <Link to="/">
         <Flex align="center">
-          <IoBookSharp style={{color:'#4299E1'}}/>
+          <IoBookSharp style={{ color: "#4299E1" }} />
           <Text>BookShop</Text>
         </Flex>
       </Link>
@@ -67,9 +71,23 @@ function Nav() {
       </Box>
       <Box>
         <Flex align="center" gap={2}>
-          <Link to="/checkout">
-            <BsCart4 style={{ fontSize: "30px",color:'#4299E1' }} />
-          </Link>
+          <Box position={"relative"}>
+            {/* <Text position={"absolute"}>1</Text> */}
+            <Badge
+              ml="1"
+              fontSize="0.7em"
+              colorScheme="green"
+              position={"absolute"}
+              right={1}
+              top={-1}
+              borderRadius={"100%"}
+            >
+              {cart.length}
+            </Badge>
+            <Link to="/checkout">
+              <BsCart4 style={{ fontSize: "30px", color: "#4299E1" }} />
+            </Link>
+          </Box>
           <Box>
             <MenuComponent />
           </Box>
