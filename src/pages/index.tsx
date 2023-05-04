@@ -11,6 +11,7 @@ import Book from "./Book";
 import Orders from "./Orders";
 import Searched from "./Searched";
 import AdminUser from "./admin/AdminUser";
+import Footer from "../components/footer/Footer";
 
 function index() {
   return (
@@ -27,6 +28,7 @@ function index() {
             <Route path="/search/:text" element={<Searched />} />
             <Route path="/admin" element={<AdminUser />} />
           </Routes>
+          <Footer />
         </Router>
       </Context>
     </Box>
