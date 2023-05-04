@@ -9,7 +9,7 @@ import {
   InputLeftElement,
   Text,
 } from "@chakra-ui/react";
-import { IoBookSharp } from "react-icons/io5";
+import { BsBook } from "react-icons/bs";
 import { BsCart4 } from "react-icons/bs";
 import MenuComponent from "../menu/MenuComponent";
 import { Link, useNavigate } from "react-router-dom";
@@ -50,9 +50,9 @@ function Nav() {
       bg={"#fff"}
     >
       <Link to="/">
-        <Flex align="center">
-          <IoBookSharp style={{ color: "#4299E1" }} />
-          <Text>BookShop</Text>
+        <Flex align="center" gap={'5px'}>
+          <BsBook style={{ color: "#4299E1", fontSize: "1.7rem"}} />
+          <Text color='blackAlpha.700' fontSize='1.2rem' fontWeight={'500'}>BookShop</Text>
         </Flex>
       </Link>
       <Box>
