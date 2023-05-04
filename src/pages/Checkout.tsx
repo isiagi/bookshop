@@ -33,7 +33,7 @@ function Checkout() {
       <Box>
         <BreadcrumbComponent />
       </Box>
-      <Flex justify="center">
+      <Flex justify="center" minH={'100vh'}>
         <Flex gap={10} wrap="wrap">
           <Box>
             {cart.length === 0 ? (
