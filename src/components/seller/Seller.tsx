@@ -8,7 +8,7 @@ function Seller() {
 
   return (
     <Box px={"10"} py={27}>
-      <Text fontSize="2xl" py={"4"}>
+      <Text fontSize="2xl" py={"4"} color={'gray.700'}>
         Best Seller
       </Text>
       <Multi seller={false} speed={3000} sellerData={false} />

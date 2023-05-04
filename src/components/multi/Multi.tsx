@@ -54,7 +54,7 @@ function Multi({ seller, speed, sellerData }: Props) {
         {data.books.map((item) => (
           <Link to={`/details/${item._id}`}>
             {" "}
-            <Box h={"420"} mr={4} _hover={{ transform: "scale(1.02)"}}>
+            <Box h={"420"} mr={4} mb={10} _hover={{ transform: "scale(1.02)"}}>
               <Box h={"80"} w={"100%"}>
                 <Image
                   src={item.imageUrl}
@@ -65,7 +65,7 @@ function Multi({ seller, speed, sellerData }: Props) {
                 />
               </Box>
               <Box>
-                <Text color={'#4299E1'}>{item.title}</Text>
+                <Text color={'gray.700'} fontSize="18px">{item.title}</Text>
                 <Text color={'gray.600'}>{item.author}</Text>
                 <Button
                   display={!seller ? "block" : "none"}
