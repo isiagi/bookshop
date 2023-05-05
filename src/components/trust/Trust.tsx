@@ -14,6 +14,8 @@ function Trust() {
         color={"#4299E1"}
         my={"5px"}
         boxShadow={"lg"}
+        gap={2}
+        justify={"center"}
       >
         <Flex
           align={"center"}
@@ -29,8 +31,7 @@ function Trust() {
           <Box>
             <Text fontWeight={600}>Quick Delievery</Text>
             <Text maxW={"240px"}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus
-              expedita.
+              Fast and secure shipping options for timely delivery.
             </Text>
           </Box>
         </Flex>
@@ -48,8 +49,7 @@ function Trust() {
           <Box>
             <Text fontWeight={600}>Easy To Pay</Text>
             <Text maxW={"240px"}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus
-              expedita.
+              Multiple payment options and hassle-free checkout.
             </Text>
           </Box>
         </Flex>
@@ -67,8 +67,7 @@ function Trust() {
           <Box>
             <Text fontWeight={600}>Nice Deals</Text>
             <Text maxW={"240px"}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus
-              expedita.
+              Great discounts on our selection of books.
             </Text>
           </Box>
         </Flex>
@@ -86,8 +85,7 @@ function Trust() {
           <Box>
             <Text fontWeight={600}>Secure Payments</Text>
             <Text maxW={"240px"}>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus
-              expedita.
+              State-of-the-art encryption for secure transactions.
             </Text>
           </Box>
         </Flex>

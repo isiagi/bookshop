@@ -2,7 +2,14 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 
 function Footer() {
   return (
-    <Flex justify={'space-between'} align="center" bg={'gray.300'} py={5} px={'10'}>
+    <Flex
+      justify={"space-between"}
+      align="center"
+      bg={"gray.300"}
+      py={5}
+      px={"10"}
+      wrap={"wrap"}
+    >
       <Flex gap={15}>
         <Text>Home</Text>
         <Text>Books</Text>
