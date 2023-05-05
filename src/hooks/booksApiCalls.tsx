@@ -156,16 +156,19 @@ export function useFetchBooks() {
   return {books, isLoading};
 }
 
-export function useFetchBookByTitleOrAuthor(book: any): Book[] {
+export function useFetchBookByTitleOrAuthor(book: any) {
   const [books, setBooks] = useState<Book[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchAndSetBooks() {
+      setIsLoading(true)
       const fetchedBooks = await fetchBookByTitleOrAuthor(book);
       setBooks(fetchedBooks);
+      setIsLoading(false)
     }
     fetchAndSetBooks();
   }, [book]);
 
-  return books;
+  return {books, isLoading};
 }

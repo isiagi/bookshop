@@ -13,46 +13,49 @@ function AdminBook() {
 
   return (
     <Flex direction="column" justify={"center"} align="center">
-     
-      {data.books?.map((item:any) => (
-        <Flex
-          gap={10}
-          mb={4}
-          border={"1px solid gray"}
-          w={600}
-          borderRadius={5}
-        >
-          <Box>
-            <Image
-              src={item.imageUrl}
-              alt=""
-              boxSize="200px"
-              objectFit="cover"
-              borderRadius={5}
-            />
-          </Box>
-          <Flex gap={10} align="center">
+      {data.isLoading ? (
+        <Text textAlign={'center'}>Loading...</Text>
+      ) : (
+        data.books?.map((item: any) => (
+          <Flex
+            gap={10}
+            mb={4}
+            border={"1px solid gray"}
+            w={600}
+            borderRadius={5}
+          >
             <Box>
-              <Text fontSize={"21px"}>{item.title}</Text>
-              <Text fontSize={"17px"} py={3}>
-                Author: {item.author}
-              </Text>
+              <Image
+                src={item.imageUrl}
+                alt=""
+                boxSize="200px"
+                objectFit="cover"
+                borderRadius={5}
+              />
+            </Box>
+            <Flex gap={10} align="center">
+              <Box>
+                <Text fontSize={"21px"}>{item.title}</Text>
+                <Text fontSize={"17px"} py={3}>
+                  Author: {item.author}
+                </Text>
 
-              <Text
-                onClick={() => handleBookDelete(item._id)}
-                fontSize={"26px"}
-                color={"red.500"}
-                cursor="pointer"
-              >
-                <AiOutlineDelete />
-              </Text>
-            </Box>
-            <Box>
-              <Text fontSize={"21px"}>Shs {item.price}</Text>
-            </Box>
+                <Text
+                  onClick={() => handleBookDelete(item._id)}
+                  fontSize={"26px"}
+                  color={"red.500"}
+                  cursor="pointer"
+                >
+                  <AiOutlineDelete />
+                </Text>
+              </Box>
+              <Box>
+                <Text fontSize={"21px"}>Shs {item.price}</Text>
+              </Box>
+            </Flex>
           </Flex>
-        </Flex>
-      ))}
+        ))
+      )}
     </Flex>
   );
 }

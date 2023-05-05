@@ -16,20 +16,17 @@ function Book() {
 
   const data = useFetchBookByTitleOrAuthor(text);
 
-  if (data.length === 0) {
-
-    return (
-      <Box>
-        <Text>Books Collection Empty</Text>
-      </Box>
-    );
-  }
-
   return (
-    <Box>
+    <Box minH={'100vh'}>
       <MInHeader name={`Searched`} />
 
-      <Books data={data} />
+      {data.isLoading ? (
+        <Text textAlign={'center'}>Loading...</Text>
+      ) : data.books.length === 0 ? (
+        <Text>Book Not Found</Text>
+      ) : (
+        <Books data={data.books} />
+      )}
     </Box>
   );
 }

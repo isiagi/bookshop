@@ -8,27 +8,18 @@ import { useEffect } from "react";
 
 function Book() {
   const data = useFetchBooks();
-  console.log(data);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (data.length === 0) {
-    console.log(data);
-
-    return (
-      <Box>
-        <Text>Books Collection Empty</Text>
-      </Box>
-    );
-  }
-
   return (
-    <Box minH={'100vh'}>
+    <Box minH={"100vh"}>
       <MInHeader name={"Books"} />
       {data.isLoading ? (
-        <Text>Loading...</Text>
+        <Text textAlign={'center'}>Loading...</Text>
+      ) : data.length === 0 ? (
+        <Text>Books Collection Empty</Text>
       ) : (
         <Books data={data.books} isLoading={data.isLoading} />
       )}
