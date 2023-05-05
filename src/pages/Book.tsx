@@ -25,9 +25,13 @@ function Book() {
   }
 
   return (
-    <Box>
+    <Box minH={'100vh'}>
       <MInHeader name={"Books"} />
-      <Books data={data.books} isLoading={data.isLoading}/>
+      {data.isLoading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <Books data={data.books} isLoading={data.isLoading} />
+      )}
     </Box>
   );
 }

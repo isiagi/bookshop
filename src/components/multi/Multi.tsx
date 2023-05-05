@@ -44,48 +44,60 @@ function Multi({ seller, speed, sellerData }: Props) {
   };
   return (
     <Box>
-      <Carousel
-        responsive={responsive}
-        autoPlay
-        autoPlaySpeed={speed}
-        draggable
-        infinite
-      >
-        {data.books.map((item) => (
-          <Link to={`/details/${item._id}`}>
-            {" "}
-            <Box h={"420"} mr={4} mb={10} _hover={{ transform: "scale(1.02)"}}>
-              <Box h={"80"} w={"100%"}>
-                <Image
-                  src={item.imageUrl}
-                  alt="hello"
-                  h={"100%"}
-                  w={"100%"}
-                  objectFit={"cover"}
-                />
-              </Box>
-              <Box>
-                <Text color={'gray.700'} fontSize="18px">{item.title}</Text>
-                <Text color={'gray.600'}>{item.author}</Text>
-                <Button
-                  display={!seller ? "block" : "none"}
-                  variant={"outline"}
-                  color={'#68D391'}
-                  borderColor={'#68D391'}
-                >
-                  shs {item.price}
-                </Button>
-                <Box display={seller ? "block" : "none"}>
-                  <Flex align={"center"} gap={2}>
-                    <BsStarFill style={{color:'#4299E1'}}/> <Text color={'gray.600'}>4.5 rating</Text>
-                  </Flex>
-                  <Text  color={'#68D391'}>shs {item.price}</Text>
+      {data.isLoading ? (
+        <Text>Loading...</Text>
+      ) : (
+        <Carousel
+          responsive={responsive}
+          autoPlay
+          autoPlaySpeed={speed}
+          draggable
+          infinite
+        >
+          {data.books.map((item) => (
+            <Link to={`/details/${item._id}`}>
+              {" "}
+              <Box
+                h={"420"}
+                mr={4}
+                mb={10}
+                _hover={{ transform: "scale(1.02)" }}
+              >
+                <Box h={"80"} w={"100%"}>
+                  <Image
+                    src={item.imageUrl}
+                    alt="hello"
+                    h={"100%"}
+                    w={"100%"}
+                    objectFit={"cover"}
+                  />
+                </Box>
+                <Box>
+                  <Text color={"gray.700"} fontSize="18px">
+                    {item.title}
+                  </Text>
+                  <Text color={"gray.600"}>{item.author}</Text>
+                  <Button
+                    display={!seller ? "block" : "none"}
+                    variant={"outline"}
+                    color={"#68D391"}
+                    borderColor={"#68D391"}
+                  >
+                    shs {item.price}
+                  </Button>
+                  <Box display={seller ? "block" : "none"}>
+                    <Flex align={"center"} gap={2}>
+                      <BsStarFill style={{ color: "#4299E1" }} />{" "}
+                      <Text color={"gray.600"}>4.5 rating</Text>
+                    </Flex>
+                    <Text color={"#68D391"}>shs {item.price}</Text>
+                  </Box>
                 </Box>
               </Box>
-            </Box>
-          </Link>
-        ))}
-      </Carousel>
+            </Link>
+          ))}
+        </Carousel>
+      )}
     </Box>
   );
 }

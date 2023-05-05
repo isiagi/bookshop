@@ -122,18 +122,21 @@ export async function deleteBook(id:any): Promise<any> {
 
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function useFetchBookById(id: any): Book[] {
+export function useFetchBookById(id: any) {
   const [books, setBooks] = useState<Book[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     async function fetchAndSetBooks() {
+      setIsLoading(true)
       const fetchedBooks = await fetchBookById(id);
       setBooks(fetchedBooks);
+      setIsLoading(false)
     }
     fetchAndSetBooks();
   }, [id]);
 
-  return books;
+  return {books, isLoading};
 }
 
 export function useFetchBooks() {
@@ -141,14 +144,14 @@ export function useFetchBooks() {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true)
     async function fetchAndSetBooks() {
+      setIsLoading(true)
       const fetchedBooks = await fetchBooks();
       setBooks(fetchedBooks);
+      setIsLoading(false)
     }
     fetchAndSetBooks();
-    setIsLoading(false)
-  }, [books]);
+  }, []);
 
   return {books, isLoading};
 }

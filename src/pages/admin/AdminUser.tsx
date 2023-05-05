@@ -56,7 +56,7 @@ function AdminUser() {
   };
 
   return (
-    <Box>
+    <Box minH={'100vh'}>
       <MInHeader name="Admin" />
       <Flex justify={"space-between"} my={6} mx={6} wrap={"wrap"} gap={4}>
         <Box>
