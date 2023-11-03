@@ -1,18 +1,35 @@
 import React, { createContext } from "react";
 import useLocalStorageState from "../hooks/useLocalStorage";
+import { useToast } from "@chakra-ui/react";
 
 export const AppContext = createContext();
 
 export const Context = (props) => {
   const [cart, setCart] = useLocalStorageState("cartItems", []);
+  const toast = useToast();
 
   const addCart = (parcel) => {
     const exist = cart.find((item) => item._id === parcel._id);
     if (!exist) {
       setCart([...cart, { ...parcel }]);
-      alert(`${parcel.title} added to cart`);
+
+      toast({
+        title: `Book Added To Cart`,
+        description: `${parcel.title} Added To Cart`,
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     } else {
-      alert("Item Already In Cart");
+      toast({
+        title: `Item Already In Cart`,
+        description: `${parcel.title} Already In Cart`,
+        status: "warning",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 
@@ -64,6 +81,7 @@ export const Context = (props) => {
         onIncrease,
         onDecrease,
         onClear,
+        setCart,
       }}
     >
       {props.children}

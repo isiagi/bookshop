@@ -6,6 +6,8 @@ import MInHeader from "../components/minheader/MInHeader";
 import Books from "../components/books/Books";
 import { useEffect } from "react";
 
+import { Spinner } from "@chakra-ui/react";
+
 function Book() {
   const data = useFetchBooks();
 
@@ -17,8 +19,11 @@ function Book() {
     <Box minH={"100vh"}>
       <MInHeader name={"Books"} />
       {data.isLoading ? (
-        <Text textAlign={'center'}>Loading...</Text>
-      ) : data.length === 0 ? (
+        <Box>
+          <Spinner />
+          <Text textAlign={"center"}>Loading...</Text>
+        </Box>
+      ) : data.books.length === 0 ? (
         <Text>Books Collection Empty</Text>
       ) : (
         <Books data={data.books} isLoading={data.isLoading} />

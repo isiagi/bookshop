@@ -3,6 +3,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 import { BsStarFill } from "react-icons/bs";
+import { Spinner } from "@chakra-ui/react";
 // import img from "../../assets/book.jpg";
 
 import { useFetchBooks } from "../../hooks/booksApiCalls";
@@ -45,7 +46,12 @@ function Multi({ seller, speed, sellerData }: Props) {
   return (
     <Box>
       {data.isLoading ? (
-        <Text>Loading...</Text>
+        <Flex gap={2}>
+          <Spinner />
+          <Text>{`Loading ${
+            !seller ? "Best Sellers..." : "Top Seller..."
+          }`}</Text>
+        </Flex>
       ) : (
         <Carousel
           responsive={responsive}

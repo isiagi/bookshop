@@ -19,12 +19,13 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 import { FormControl, FormLabel, Input, Button } from "@chakra-ui/react";
+import { useToast } from "@chakra-ui/react";
 
 import { FaRegUser } from "react-icons/fa";
 import { FaRegIdCard } from "react-icons/fa";
 import { AiOutlineLogin } from "react-icons/ai";
 import { TbPaperBag } from "react-icons/tb";
-import {BiLogOutCircle} from 'react-icons/bi'
+import { BiLogOutCircle } from "react-icons/bi";
 
 import { signUp, logIn } from "../../hooks/booksApiCalls";
 import { Link } from "react-router-dom";
@@ -33,9 +34,12 @@ import TokenChecker from "../../utils/TokenChecker";
 function MenuComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [word, setWord] = useState({});
-  const [isLogged, setIsLogged] = useState(false)
+  const [isLogged, setIsLogged] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const tokenChecker = TokenChecker({key: 'itemName'})
+  const toast = useToast();
+
+  const tokenChecker = TokenChecker({ key: "itemName" });
 
   const nameRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -54,18 +58,59 @@ function MenuComponent() {
   const handleSign = async () => {
     let token;
     if (word.label === "Register") {
-      token = await signUp(nameRef.current.value, emailRef.current.value);
-      console.log(token);
-      onClose()
-    } else {
-      const response = await logIn(nameRef.current.value, emailRef.current.value);
-      if(response === 'Error Occuried'){
-        alert("try signing up")
-        onClose()
-        return
+      try {
+        setLoading(true);
+        token = await signUp(nameRef.current.value, emailRef.current.value);
+        console.log(token);
+        onClose();
+        toast({
+          title: "SignIn Successful",
+          description: "You have been logined in",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top",
+        });
+      } catch (error) {
+        console.log(error);
+        return;
+      } finally {
+        setLoading(false);
       }
-      token = response
-      onClose()
+    } else {
+      try {
+        setLoading(true);
+        const response = await logIn(
+          nameRef.current.value,
+          emailRef.current.value
+        );
+        setLoading(false);
+        toast({
+          title: "LogIn Successful",
+          description: "You have been logined in",
+          status: "success",
+          duration: 9000,
+          isClosable: true,
+          position: "top",
+        });
+        if (response === "Error Occuried") {
+          toast({
+            title: "Login Failed, Try Again",
+            description: "Try Signing Up, If You Have No Account",
+            status: "error",
+            duration: 9000,
+            isClosable: true,
+            position: "top",
+          });
+          onClose();
+          return;
+        }
+        token = response;
+        onClose();
+      } catch (error) {
+        console.log(error);
+        return;
+      }
     }
 
     localStorage.setItem("itemName", token.token);
@@ -76,7 +121,15 @@ function MenuComponent() {
   const handleLogOut = () => {
     localStorage.removeItem("itemName");
     setIsLogged(false);
-    onClose()
+    onClose();
+    toast({
+      title: "Logout Successful",
+      description: "You have been successfully sign out",
+      status: "success",
+      duration: 9000,
+      isClosable: true,
+      position: "top",
+    });
   };
   // console.log(initialRef.current);
 
@@ -92,33 +145,42 @@ function MenuComponent() {
           aria-label="Options"
           icon={<FaRegUser />}
           variant="outline"
-          color={'#fff'}
-          border={'none'}
-          bg={isLogged ? 'green.500': 'red.400'}
+          color={isLogged ? "green.500" : "red.400"}
+          border={"none"}
+          // bg={isLogged ? 'green.500': 'red.400'}
         />
         <MenuList>
           {isLogged ? (
             <>
-              <MenuItem icon={<BiLogOutCircle />} onClick={() => handleLogOut()}>
-                LogOut
-              </MenuItem>
               <Link to="/orders">
                 <MenuItem icon={<TbPaperBag />}>Your Orders</MenuItem>
               </Link>
               <Link to="/admin">
                 <MenuItem icon={<TbPaperBag />}>Admin</MenuItem>
               </Link>
+              <MenuItem
+                icon={<BiLogOutCircle />}
+                onClick={() => handleLogOut()}
+              >
+                LogOut
+              </MenuItem>
             </>
           ) : (
             <>
               <MenuItem
-                icon={<AiOutlineLogin style={{color: 'green',fontSize:'18px'}}/>}
+                icon={
+                  <AiOutlineLogin
+                    style={{ color: "green", fontSize: "18px" }}
+                  />
+                }
                 onClick={() => handleMenuItemClickLog()}
               >
                 Login
               </MenuItem>
               <MenuItem
-                icon={<FaRegIdCard style={{color: 'green',fontSize:'18px'}}/>}
+                icon={
+                  <FaRegIdCard style={{ color: "green", fontSize: "18px" }} />
+                }
                 onClick={() => handleMenuItemClickSign()}
               >
                 Sign Up
@@ -141,17 +203,30 @@ function MenuComponent() {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Email</FormLabel>
-              <Input ref={nameRef} placeholder="FullName" required/>
+              <Input ref={nameRef} placeholder="FullName" required />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Password</FormLabel>
-              <Input ref={emailRef} placeholder="Email" required type={'password'}/>
+              <Input
+                ref={emailRef}
+                placeholder="Email"
+                required
+                type={"password"}
+              />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => handleSign()}>
+            <Button
+              isLoading={loading}
+              loadingText="Submitting"
+              colorScheme="teal"
+              variant="outline"
+              colorScheme="blue"
+              mr={3}
+              onClick={() => handleSign()}
+            >
               {word.label}
             </Button>
             <Button onClick={onClose}>Cancel</Button>

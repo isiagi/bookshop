@@ -11,11 +11,8 @@ function Seller() {
       <Text fontSize="2xl" py={"4"} color={"gray.700"}>
         Best Seller
       </Text>
-      {data.isLoading ? (
-        <Text>Loading...</Text>
-      ) : (
-        <Multi seller={false} speed={3000} sellerData={false} />
-      )}
+
+      <Multi seller={false} speed={3000} sellerData={false} />
     </Box>
   );
 }

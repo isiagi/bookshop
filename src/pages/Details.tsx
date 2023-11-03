@@ -1,6 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Spinner, Text } from "@chakra-ui/react";
 import TopRating from "../components/seller/TopRating";
 // import Quantity from "../components/quantity/Quantity";
 import { useContext, useEffect } from "react";
@@ -29,7 +29,14 @@ function Details() {
         name={item.isLoading ? `Details` : `${item.books.title} Details`}
       />
       {item.isLoading ? (
-        <Text>Loading...</Text>
+        <Flex h={490} gap={2} justify={"center"} align={"center"}>
+          <Spinner />
+          <Text>{`Loading...`}</Text>
+        </Flex>
+      ) : item.books.length === 0 ? (
+        <Box h={490}>
+          <Text>Books Collection Empty</Text>
+        </Box>
       ) : (
         <Flex justify={"center"} gap={4} wrap={"wrap"} pt={7}>
           <Box h={490}>

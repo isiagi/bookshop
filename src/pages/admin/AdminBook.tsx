@@ -14,7 +14,9 @@ function AdminBook() {
   return (
     <Flex direction="column" justify={"center"} align="center">
       {data.isLoading ? (
-        <Text textAlign={'center'}>Loading...</Text>
+        <Text textAlign={"center"}>Loading...</Text>
+      ) : data.books.length === 0 ? (
+        <Text>Books Collection Empty</Text>
       ) : (
         data.books?.map((item: any) => (
           <Flex

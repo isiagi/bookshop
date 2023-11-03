@@ -3,9 +3,9 @@ import img from "../../assets/book.jpg";
 
 type CName = {
   name: string;
-}
+};
 
-function MInHeader({name}:CName) {
+function MInHeader({ name }: CName) {
   return (
     <Flex
       bgImage={`linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url(${img})`}
@@ -13,10 +13,16 @@ function MInHeader({name}:CName) {
       bgPosition="center"
       bgRepeat="no-repeat"
       bgSize={"cover"}
-      align={'center'}
-      justify={'center'}
+      align={"center"}
+      justify={"center"}
+      direction={"column"}
     >
-        <Text fontSize='3xl' color={"#fff"} >{name}</Text>
+      <Text fontSize="3xl" color={"#fff"}>
+        Book
+      </Text>
+      <Text fontSize="3xl" color={"#fff"}>
+        {name}
+      </Text>
     </Flex>
   );
 }

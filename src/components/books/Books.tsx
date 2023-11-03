@@ -1,25 +1,30 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { Box, Flex, Image, Text } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
+import { Box, Flex, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 type TData = {
-    data: [],
-    isLoading: boolean,
-}
+  data: [];
+  isLoading: boolean;
+};
 
-function Books({data, isLoading}:TData) {
-  if(isLoading){
-    <div>
-      <h1>Loading...</h1>
-    </div>
-  }
+function Books({ data, isLoading }: TData) {
+  // if (isLoading) {
+  //   <div>
+  //     <h1>Loading...</h1>
+  //   </div>;
+  // }
   return (
     <Box my={10} mx={10}>
+      {isLoading ? (
+        <h1>Loading</h1>
+      ) : data.length === 0 ? (
+        <h1>No Book Found</h1>
+      ) : (
         <Flex wrap={"wrap"} gap={4} justify={"center"}>
           {data.map((item) => (
             <Link to={`/details/${item._id}`}>
-              <Box w={250} _hover={{ transform: "scale(1.05)"}}>
+              <Box w={250} _hover={{ transform: "scale(1.05)" }}>
                 <Box h={330} borderRadius={10}>
                   <Image
                     src={item.imageUrl}
@@ -37,8 +42,9 @@ function Books({data, isLoading}:TData) {
             </Link>
           ))}
         </Flex>
-      </Box>
-  )
+      )}
+    </Box>
+  );
 }
 
-export default Books
+export default Books;
